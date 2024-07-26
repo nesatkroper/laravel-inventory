@@ -3,12 +3,10 @@
 use App\Http\Controllers\app\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
-Route::get('test', function () {
-    return view('test');
-});
+Route::get('/', 'App\Http\Controllers\app\CountController@count')->name('/');
 
-Route::resource('employee', 'App\Http\Controllers\app\EmployeeController');
+Route::resource('emp', 'App\Http\Controllers\app\EmployeeController');

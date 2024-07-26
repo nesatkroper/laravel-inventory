@@ -3,16 +3,16 @@
     <div class="app-content mt-4">
       <div class="card card-info card-outline mb-4">
         <div class="card-header">
-          <div class="card-title">Add New Employee</div>
+          <div class="card-title">Update Employee Information</div>
         </div>
         <form
-          action="{{ route('emp.store') }}"
+          action="{{route('emp.update', $emp->id)}}"
           class="needs-validation"
           novalidate
           method="POST"
           enctype="multipart/form-data"
         >
-          @csrf
+          @csrf @method('PUT')
           <div class="card-body">
             <div class="row g-3">
               <div class="col-md-6">
@@ -23,7 +23,7 @@
                   type="text"
                   class="form-control"
                   id="validationCustom01"
-                  value=""
+                  value="{{$emp->fname}}"
                   name="fname"
                   required
                 />
@@ -37,7 +37,7 @@
                   type="text"
                   class="form-control"
                   id="validationCustom01"
-                  value=""
+                  value="{{$emp->lname}}"
                   name="lname"
                   required
                 />
@@ -54,9 +54,19 @@
                   name="gender"
                   required
                 >
+                  @if($emp->gender == 'Male')
                   <option selected disable value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Others">Others</option>
+                  @elseif($emp->gender == 'Female')
+                  <option selected disable value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Others">Others</option>
+                  @else
+                  <option selected disable value="Others">Others</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  @endif
                 </select>
                 <div class="invalid-feedback">
                   Please select a valid gender.
@@ -70,7 +80,7 @@
                   type="text"
                   class="form-control"
                   id="validationCustom02"
-                  value=""
+                  value="{{$emp->mobile}}"
                   name="mobile"
                   required
                 />
@@ -82,7 +92,7 @@
                   type="email"
                   class="form-control"
                   id="validationCustom02"
-                  value=""
+                  value="{{$emp->email}}"
                   name="email"
                   required
                 />
@@ -96,7 +106,7 @@
                   type="email"
                   class="form-control"
                   id="validationCustom02"
-                  value=""
+                  value="{{$emp->address}}"
                   name="address"
                   required
                 />
@@ -110,7 +120,7 @@
                   type="date"
                   class="form-control today"
                   id="today"
-                  value=""
+                  value="{{$emp->dob}}"
                   name="dob"
                   required
                 />
@@ -124,7 +134,7 @@
                   type="text"
                   class="form-control"
                   id="validationCustom01"
-                  value=""
+                  value="{{$emp->pob}}"
                   name="pob"
                   required
                 />
@@ -141,9 +151,19 @@
                   name="status"
                   required
                 >
+                  @if($emp->status == 'Work')
                   <option selected disable value="Work">Work</option>
                   <option value="Fired">Fired</option>
                   <option value="Others">Others</option>
+                  @elseif($emp->status == 'Fired')
+                  <option selected disable value="Fired">Fired</option>
+                  <option value="Work">Work</option>
+                  <option value="Others">Others</option>
+                  @else
+                  <option selected disable value="Others">Others</option>
+                  <option value="Work">Work</option>
+                  <option value="Fired">Fired</option>
+                  @endif
                 </select>
                 <div class="invalid-feedback">
                   Please select a valid gender.
@@ -161,6 +181,17 @@
                 <div class="invalid-feedback">
                   Please provide a valid image.
                 </div>
+              </div>
+              <div class="col-md-6">
+                <label for="validationCustom01" class="form-label"
+                  >Old Photo</label
+                >
+                <img
+                  src="{{url('uploads/employee/'.$emp->photo)}}"
+                  class="rounded-3 form-control"
+                  style="max-width: 200px; max-height: 200px"
+                  alt="Image"
+                />
               </div>
               <div class="col-md-6">
                 <img src="" class="rounded-3 float-start" alt="" />

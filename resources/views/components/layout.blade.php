@@ -29,5 +29,12 @@
     --}}
     <script src="{{ url('./dist/js/adminlte.js') }}"></script>
     <script src="{{ url('./fontawesome/js/all.js') }}"></script>
+    <script>
+      const today = new Date().toISOString().split("T")[0];
+      document.getElementById("today").value = today;
+
+      const status = document.getElementsByClassName("status");
+      if (status.value === "Fired") status.className = "text-danger";
+    </script>
   </body>
 </html>
